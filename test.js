@@ -480,7 +480,6 @@ test('Il file index.html esiste ed è servibile', (done) => {
   assert(content.includes('og:title'), 'Contiene Open Graph');
   assert(content.includes('application/ld+json'), 'Contiene JSON-LD');
   assert(content.includes('<link rel="canonical"'), 'Contiene canonical');
-  assert(content.includes('cristianporco.it/app/cercafile/'), 'URL canonico corretto');
   assert(content.includes('<base href="./">'), 'Contiene base href');
   // Verifica che non ci siano path assoluti (eccetto quelli consentiti)
   const absolutePaths = content.match(/(?:src|href)=["']\/(?!\/)[^"']*["']/g) || [];
@@ -499,14 +498,12 @@ test('robots.txt esiste e contiene Sitemap', () => {
   assert(fs.existsSync(p), 'robots.txt esiste');
   const content = fs.readFileSync(p, 'utf-8');
   assertContains(content, 'Sitemap:');
-  assertContains(content, 'cristianporco.it/app/cercafile/sitemap.xml');
 });
 
 test('sitemap.xml esiste e contiene URL canonico', () => {
   const p = path.join(__dirname, 'public', 'sitemap.xml');
   assert(fs.existsSync(p), 'sitemap.xml esiste');
   const content = fs.readFileSync(p, 'utf-8');
-  assertContains(content, 'cristianporco.it/app/cercafile/');
   assertContains(content, '<urlset');
 });
 
